@@ -73,9 +73,27 @@ int DynamicArray::RemoveAll(int target) {
 }
 
 void DynamicArray::RemoveDuplicates() {
-    for(int i = 0; i < size; ++i) {
-        
-    }
+    int count;
+    int i = 0;
+    do {
+        count = 0;
+        for(int j = i+1; j < size; ++j) {
+            if(values_[j] == values_[i]) {
+                ++count;
+            }
+        }
+        int *temp = new int[size_-count];
+        for(int j = 0, l = 0; j < (size_); ++i) {
+            if(values_[j] != target) {
+                temp[l] = values_[j];
+                ++l;
+            }
+        }
+        delete [] values_;
+        values_ = temp;
+        size_ -= count;
+        ++i;
+    } while(i < size)
 }
 
 void DynamicArray::SetDelimiter(char delimeter) {
