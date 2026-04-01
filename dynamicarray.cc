@@ -40,12 +40,37 @@ DynamicArray& DynamicArray::operator=(const DynamicArray &d) {
         for (int i = 0; i < d.size_; i++) {
             temp[i] = d.values_[i];
         }
-
         delete[] values_;
         values_ = temp;
         size_ = d.size_;
     }
     return *this;
+}
+
+void DynamicArray::SetSize(int nSize, bool copy) {
+    int *temp = new int[nSize];
+    if(copy == false) {
+        for(int i = 0; i < nSize; ++i) {
+            temp[i] = 0;
+        }
+    } else {
+        if(nSize > size_) {
+            for(int i = 0; i < nSize; ++i) {
+                if(i < size_) {
+                    temp[i] = 0;                    
+                } else {
+                    temp[i] = values_[i];
+                }
+            }
+        } else {
+            for(int i = 0; i < nSize; ++i) {
+                temp[i] = values_[i];                    
+            }
+        }
+    }
+    delete [] values_;
+    values_ = temp;
+    size_ = nSize;
 }
 
 
@@ -102,4 +127,36 @@ void DynamicArray::SetDelimiter(char delimeter) {
 
 std::ostream &operator<<(std::ostream &ostream, const DynamicArray &d) {
      
+}
+
+int DynamicArray::Operations(char op) {
+    int end = values_[0];
+    swtich(op) {
+        case '+':
+        for(int i = 1; i < size_ < ++i) {
+            end += values_[i];
+        }
+        break;
+        case '-':
+        for(int i = 1; i < size_ < ++i) {
+            end -= values_[i];
+        }
+        break;
+        case '*':
+        for(int i = 1; i < size_ < ++i) {
+            end *= values_[i];
+        }
+        break;
+        case '/':
+        for(int i = 1; i < size_ < ++i) {
+            if(values_[i] != 0) {
+                end /= values_[i];
+            } else {
+                cout << "Division by 0 is not allowed." << endl;
+                return 0;
+            }
+        }
+        break;
+    }
+    return end;
 }
