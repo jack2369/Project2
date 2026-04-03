@@ -37,7 +37,7 @@ class DynamicArray {
   
   bool AllUnique() const;
 
-  void FindAndReplace(int find, int replace);
+  int FindAndReplace(int find, int replace);
 
   void Sort(bool descending = false);
     
