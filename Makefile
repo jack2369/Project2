@@ -14,8 +14,7 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 run: $(TARGET)
-	.\$(TARGET)
+	./$(TARGET)
 
 clean:
-	del /Q $(TARGET).exe 2>nul || true
-	del /Q *.o 2>nul || true
+	rm -f $(TARGET) *.o
