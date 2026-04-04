@@ -1,8 +1,11 @@
+// Copyright 2026 Jack Andrin and James Efird
+#ifndef DYNAMICARRAY_H_
+#define DYNAMICARRAY_H_
+
 #include <iostream>
 
 class DynamicArray {
  public:
-
   explicit DynamicArray(int size = 1);
 
   DynamicArray(const DynamicArray& d);
@@ -34,27 +37,28 @@ class DynamicArray {
   int RemoveAll(int target);
 
   void RemoveDuplicates();
-  
+
   bool AllUnique() const;
 
   int FindAndReplace(int find, int replace);
 
   void Sort(bool descending = false);
-    
+
   static void SetDelimiter(char delimeter);
 
   static char GetDelimiter() {return delimiter_;}
 
   int Operations(char op = '+');
 
-  ~DynamicArray() {delete [] values_;} //destructor to avoid memleaks
-  
+  ~DynamicArray() {delete [] values_;}  // destructor to avoid memory leaks
+
  private:
   int size_;
   int * values_;
-  static char delimiter_; // (for separator used by <<)
-  
+  static char delimiter_;  // (for separator used by <<)
+
   friend std::ostream &operator<<(std::ostream &ostream, const DynamicArray &d);
 };
 
 std::ostream &operator<<(std::ostream &ostream, const DynamicArray &d);
+#endif  // DYNAMICARRAY_H_

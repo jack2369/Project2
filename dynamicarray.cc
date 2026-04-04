@@ -1,3 +1,4 @@
+// Copyright 2026 Jack Andrin and James Efird
 #include "dynamicarray.h"
 #include <iostream>
 using std::cout;
@@ -21,19 +22,19 @@ DynamicArray::DynamicArray(const DynamicArray& d) {
     size_ = d.size_;
     delimiter_ = d.delimiter_;
     values_ = new int[size_];
-    for(int i = 0; i < size_; ++i) {
+    for (int i = 0; i < size_; ++i) {
         values_[i] = d.values_[i];
     }
 }
 
 bool DynamicArray::operator ==(DynamicArray& d) const {
     // if the sizes don't match
-    if(d.size_ != size_) {
+    if (d.size_ != size_) {
         return false;
     }
     // checks each value
-    for(int i = 0; i < size_; ++i) {
-        if(values_[i] != d.values_[i]) {
+    for (int i = 0; i < size_; ++i) {
+        if (values_[i] != d.values_[i]) {
             return false;
         }
     }
@@ -56,22 +57,22 @@ DynamicArray& DynamicArray::operator=(const DynamicArray &d) {
 
 void DynamicArray::SetSize(int nSize, bool copy) {
     int *temp = new int[nSize];
-    if(copy == false) {
-        for(int i = 0; i < nSize; ++i) {
+    if (copy == false) {
+        for (int i = 0; i < nSize; ++i) {
             temp[i] = 0;
         }
     } else {
-        if(nSize > size_) {
-            for(int i = 0; i < nSize; ++i) {
-                if(i < size_) {
+        if (nSize > size_) {
+            for (int i = 0; i < nSize; ++i) {
+                if (i < size_) {
                     temp[i] = values_[i];
                 } else {
                     temp[i] = 0;
                 }
             }
         } else {
-            for(int i = 0; i < nSize; ++i) {
-                temp[i] = values_[i];                    
+            for (int i = 0; i < nSize; ++i) {
+                temp[i] = values_[i];
             }
         }
     }
@@ -84,15 +85,15 @@ void DynamicArray::SetSize(int nSize, bool copy) {
 int DynamicArray::RemoveAll(int target) {
     // counts every instance of the target int
     int count = 0;
-    for(int i = 0; i < size_; ++i) {
-        if(values_[i] == target) {
+    for (int i = 0; i < size_; ++i) {
+        if (values_[i] == target) {
             ++count;
         }
     }
     // makes temporary pointer to hold new array
     int *temp = new int[size_-count];
-    for(int i = 0, j = 0; i < (size_); ++i) {
-        if(values_[i] != target) {
+    for (int i = 0, j = 0; i < (size_); ++i) {
+        if (values_[i] != target) {
             temp[j] = values_[i];
             ++j;
         }
@@ -109,14 +110,14 @@ void DynamicArray::RemoveDuplicates() {
     int i = 0;
     do {
         count = 0;
-        for(int j = i+1; j < size_; ++j) {
-            if(values_[j] == values_[i]) {
+        for (int j = i+1; j < size_; ++j) {
+            if (values_[j] == values_[i]) {
                 ++count;
             }
         }
         int *temp = new int[size_-count];
-        for(int j = 0, l = 0; j < (size_); ++j) {
-            if(j == i || values_[j] != values_[i]) {
+        for (int j = 0, l = 0; j < (size_); ++j) {
+            if (j == i || values_[j] != values_[i]) {
                 temp[l] = values_[j];
                 ++l;
             }
@@ -125,7 +126,7 @@ void DynamicArray::RemoveDuplicates() {
         values_ = temp;
         size_ -= count;
         ++i;
-    } while(i < size_);
+    } while (i < size_);
 }
 
 void DynamicArray::SetDelimiter(char delimeter) {
@@ -134,25 +135,25 @@ void DynamicArray::SetDelimiter(char delimeter) {
 
 int DynamicArray::Operations(char op) {
     int end = values_[0];
-    switch(op) {
+    switch (op) {
         case '+':
-        for(int i = 1; i < size_; ++i) {
+        for (int i = 1; i < size_; ++i) {
             end += values_[i];
         }
         break;
         case '-':
-        for(int i = 1; i < size_; ++i) {
+        for (int i = 1; i < size_; ++i) {
             end -= values_[i];
         }
         break;
         case '*':
-        for(int i = 1; i < size_; ++i) {
+        for (int i = 1; i < size_; ++i) {
             end *= values_[i];
         }
         break;
         case '/':
-        for(int i = 1; i < size_; ++i) {
-            if(values_[i] != 0) {
+        for (int i = 1; i < size_; ++i) {
+            if (values_[i] != 0) {
                 end /= values_[i];
             } else {
                 cout << "Division by 0 is not allowed." << endl;
@@ -165,9 +166,9 @@ int DynamicArray::Operations(char op) {
 }
 
 bool DynamicArray::AllUnique() const {
-    for(int i = 0; i < size_; ++i) {
-        for(int j = i + 1; j < size_; ++j) {
-            if(values_[i] == values_[j]) {
+    for (int i = 0; i < size_; ++i) {
+        for (int j = i + 1; j < size_; ++j) {
+            if (values_[i] == values_[j]) {
                 return false;
             }
         }
@@ -177,8 +178,8 @@ bool DynamicArray::AllUnique() const {
 
 int DynamicArray::FindAndReplace(int find, int replace) {
     int count = 0;
-    for(int i = 0; i < size_; ++i) {
-        if(values_[i] == find) {
+    for (int i = 0; i < size_; ++i) {
+        if (values_[i] == find) {
             values_[i] = replace;
             ++count;
         }
@@ -187,9 +188,10 @@ int DynamicArray::FindAndReplace(int find, int replace) {
 }
 
 void DynamicArray::Sort(bool descending) {
-    for(int i = 0; i < size_ - 1; ++i) {
-        for(int j = i + 1; j < size_; ++j) {
-            if((!descending && values_[i] > values_[j]) || (descending && values_[i] < values_[j])) {
+    for (int i = 0; i < size_ - 1; ++i) {
+        for (int j = i + 1; j < size_; ++j) {
+            if ((!descending && values_[i] > values_[j])
+                || (descending && values_[i] < values_[j])) {
                 int temp = values_[i];
                 values_[i] = values_[j];
                 values_[j] = temp;
@@ -199,9 +201,9 @@ void DynamicArray::Sort(bool descending) {
 }
 
 std::ostream &operator<<(std::ostream &ostream, const DynamicArray &d) {
-    for(int i = 0; i < d.size_; ++i) {
+    for (int i = 0; i < d.size_; ++i) {
         ostream << d.values_[i];
-        if(i != d.size_ - 1) {
+        if (i != d.size_ - 1) {
             ostream << d.delimiter_;
         }
     }
